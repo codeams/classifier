@@ -7,15 +7,15 @@ Created on Wed May  2 16:36:09 2018
 """
 
 # Third party modules
-import cv2, numpy, os, glob
+import numpy
 from sklearn.svm import LinearSVC
 
 # Project modules
-import config, extractor
+from extractor import extract_vectors
 from validator import validate
 
 ### Extract data ###
-train_data = extractor.extract_vectors()
+train_data = extract_vectors()
 train_features = train_data['features']
 train_labels = train_data['labels']
 print "Training features: {}".format(numpy.array(train_features).shape)
@@ -28,4 +28,5 @@ svm_classifier = LinearSVC(random_state=9)
 print "[STATUS] Fitting data/label to model.."
 svm_classifier.fit(train_features, train_labels)
 
+### Validate the classifier ###
 validate(svm_classifier)
