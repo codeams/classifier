@@ -29,4 +29,9 @@ print "[STATUS] Fitting data/label to model.."
 svm_classifier.fit(train_features, train_labels)
 
 ### Validate the classifier ###
-validate(svm_classifier)
+results = validate(svm_classifier)
+
+print "[RESULTS]"
+print "{} validations".format(results['total_validations'])
+print "{} successful".format(results['success_counter'])
+print "{}% precise".format(results['precision'])
