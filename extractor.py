@@ -1,16 +1,26 @@
 
-import os, numpy, glob, cv2
+import cv2
+import glob
+import numpy
+import os
 
 import config
-from features import color_histogram, haralick, hu_moments
+from features import entropy, color_histogram, haralick, hu_moments, vector
 from utils import remove_system_files
 
 
 def extract_features(image):
+    if config.SCALE_IMAGE:
+        cv2.resize(image, (45, 45))
+
     features = (
-        haralick(image),
+        # haralick(image),
+        color_histogram(image),
         hu_moments(image),
-        color_histogram(image)
+        entropy(image),
+        vector(image),
+        ()  # This allows the return statement to concatenate even
+            # if we're only using one descriptor
     )
     return numpy.concatenate(features).ravel()
 

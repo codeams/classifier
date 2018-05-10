@@ -3,7 +3,11 @@ import cv2
 import imutils
 import mahotas
 
-from preprocessors import grayscale
+from preprocessors import grayscale, image_to_feature_vector
+
+
+def vector(image):
+    return image_to_feature_vector(image)
 
 
 def color_histogram(image, bins=(8, 8, 8)):
@@ -24,6 +28,12 @@ def color_histogram(image, bins=(8, 8, 8)):
 
     # return the flattened histogram as the feature vector
     return hist.flatten()
+
+
+def entropy(image):
+    entropy = mahotas.features.haralick(grayscale(image))
+    entropy_mean = entropy.mean(axis=0)
+    return entropy_mean
 
 
 def haralick(image):
