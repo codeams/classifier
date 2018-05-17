@@ -14,9 +14,7 @@ from extractor import extract_vectors
 from validator import validate
 
 # Extract data
-train_data = extract_vectors()
-train_features = train_data['features']
-train_labels = train_data['labels']
+train_features, train_labels = extract_vectors()
 print "Training features: {}".format(numpy.array(train_features).shape)
 print "Training labels: {}".format(numpy.array(train_labels).shape)
 

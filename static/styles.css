@@ -1,0 +1,10 @@
+
+*,
+*::before,
+*::after {
+  font-family: 'Roboto';
+}
+
+h1 {
+  font-family: 'Montserrat';
+}

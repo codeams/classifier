@@ -15,9 +15,9 @@ def extract_features(image):
 
     features = (
         # haralick(image),
-        color_histogram(image),
-        hu_moments(image),
-        entropy(image),
+        # color_histogram(image),
+        # hu_moments(image),
+        # entropy(image),
         vector(image),
         ()  # This allows the return statement to concatenate even
             # if we're only using one descriptor
@@ -46,7 +46,4 @@ def extract_vectors():
             train_features.append(features)
             train_labels.append(cur_label)
 
-    return {
-        'features': train_features,
-        'labels': train_labels
-    }
+    return train_features, train_labels

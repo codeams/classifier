@@ -3,7 +3,7 @@
 DATASET_NAME = 'fruits'
 IMAGES_EXTENSION = 'jpg'
 SCALE_IMAGE = False
-DEBUG_MODE = True
+DEBUG_MODE = False
 PRINT_PREDICTIONS = True
 
 # Computed configuration #
