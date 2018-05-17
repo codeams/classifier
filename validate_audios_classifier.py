@@ -17,7 +17,7 @@ print "Training labels: {}".format(numpy.array(train_labels).shape)
 
 # Train the classifier
 print "[STATUS] Creating the classifier.."
-svm_classifier = LinearSVC(random_state=9)
+svm_classifier = LinearSVC(random_state=42)
 
 # Needed to check feature length when the audio
 # length wasn't the same and I was getting a "valueType"

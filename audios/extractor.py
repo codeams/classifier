@@ -2,24 +2,24 @@
 import glob
 import numpy
 import os
-import librosa
-from scipy.io import wavfile
 
 import config
-from features import peaks_indexes, peaks_count, spectral_bandwidth
+from features import spectral_bandwidth, melspectogram, spectral_flatness, wav2mfcc, peaks_indexes, peaks_count
 from utils import remove_system_files
 
 
 def extract_features(file_path):
-    # print spectral_bandwidth(file_path)[0]
-    # exit()
-
     features = (
-        spectral_bandwidth(file_path)[0],
-        ()  # This allows the return statement to concatenate even
-            # if we're only using one descriptor
+        # peaks_indexes(file_path),
+        # peaks_count(file_path),
+        # spectral_flatness(file_path),
+        # melspectogram(file_path),
+        spectral_bandwidth(file_path),
+        # wav2mfcc(file_path)
     )
-    return numpy.hstack(features)
+
+    return numpy.concatenate(features).ravel()
+    # return numpy.hstack(features)
     # return numpy.concatenate(features).ravel()
 
 

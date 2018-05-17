@@ -1,5 +1,6 @@
 
 import pyaudio
+import datetime
 import wave
 from array import array
 
@@ -60,6 +61,13 @@ def record_wav(path, name):
 
 
 if __name__ == '__main__':
+    if config.RECORD_FOR == 'demo':
+        raw_input("Presiona enter para empezar a grabar ")
+        print "Se inicio la grabacion"
+        file_name = datetime.datetime.now().strftime("%I-%M%p | %A, %d. %B %Y")
+        record_wav(config.DEMO_PATH, "{}".format(file_name))
+        exit()
+
     for label in config.LABELS:
         print "Recording for " + label
 
