@@ -1,11 +1,10 @@
 
 import sys
-sys.path.append('images')
+sys.path.append('audios')
 
 # Third party modules
 import numpy
 from sklearn.svm import LinearSVC
-from sklearn.neighbors import KNeighborsClassifier
 
 # Project modules
 from extractor import extract_vectors
@@ -18,14 +17,21 @@ print "Training labels: {}".format(numpy.array(train_labels).shape)
 
 # Train the classifier
 print "[STATUS] Creating the classifier.."
-# classifier = LinearSVC(random_state=9)
-classifier = KNeighborsClassifier(n_neighbors=5)
+svm_classifier = LinearSVC(random_state=9)
+
+# Needed to check feature length when the audio
+# length wasn't the same and I was getting a "valueType"
+# error
+#
+# for train_feature in train_features:
+#    print len(train_feature)
+# exit()
 
 print "[STATUS] Fitting data/label to model.."
-classifier.fit(train_features, train_labels)
+svm_classifier.fit(train_features, train_labels)
 
 # Validate the classifier
-results = validate(classifier)
+results = validate(svm_classifier)
 
 print "[RESULTS]"
 print "{} validations".format(results['total_validations'])
