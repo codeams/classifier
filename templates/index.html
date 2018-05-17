@@ -2,28 +2,52 @@
 
 {% block content %}
   <div class='container mt-5'>
-    <h1 class='mb-4'>Clasifrutador</h1>
+    <div class='row justify-content-center'>
+      <div class='col-5 border rounded p-5'>
+        <h1 class='mb-4 font-weight-light'>Clasifrutador</h1>
 
-    <form action='classify' method='POST' enctype='multipart/form-data'>
-      <div class='form-group'>
-        <label for='image'>
-          Audio
-        </label>
+        <form action='' method='POST' enctype='multipart/form-data'>
+          <div class='form-group'>
+            <label for='image'>
+              Audio con instrucción
+            </label>
 
-        <input type='file' name='image' id='image' class='form-control-file'>
+            <div class="custom-file">
+              <input type='file' name='audio' id='audio' class='custom-file-input'>
+              <label class='custom-file-label' for='audio'>Seleccionar .wav</label>
+            </div>
+          </div>
+
+          <div class='form-group'>
+            <label for='image'>
+              Imagen de fruta
+            </label>
+
+            <div class="custom-file">
+              <input type='file' name='image' id='image' class='custom-file-input' required>
+              <label class='custom-file-label' for='image'>Seleccionar .jpg</label>
+            </div>
+          </div>
+
+          <div class='text-right'>
+            <button type='submit' class='btn btn-primary mt-3'>
+              Clasifrutar
+            </button>
+          </div>
+        </form>
+
+        {% if prediction %}
+          <p class='text-right mt-5'>
+            <span class='text-muted'>
+              El clasifrutador cree que eso es un
+            </span>
+
+            <strong class='text-primary text-uppercase'>
+              {{ prediction }}
+            </strong>
+          </p>
+        {% endif %}
       </div>
-
-      <div class='form-group'>
-        <label for='image'>
-          Imagen
-        </label>
-
-        <input type='file' name='image' id='image' class='form-control-file' required>
-      </div>
-
-      <button type='submit' class='btn btn-primary mt-3'>
-        Enviar
-      </button>
-    </form>
+    </div>
   </div>
 {% endblock %}
