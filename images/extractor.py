@@ -10,14 +10,11 @@ from utils import remove_system_files
 
 
 def extract_features(image):
-    # if config.SCALE_IMAGE:
-    #    cv2.resize(image, (45, 45))
-
     features = (
         # haralick(image),
-        # color_histogram(image),
-        # hu_moments(image),
-        # entropy(image),
+        entropy(image),
+        color_histogram(image),
+        hu_moments(image),
         vector(image),
         ()  # This allows the return statement to concatenate even
             # if we're only using one descriptor

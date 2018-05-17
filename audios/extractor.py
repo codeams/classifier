@@ -4,23 +4,18 @@ import numpy
 import os
 
 import config
-from features import spectral_bandwidth, melspectogram, spectral_flatness, wav2mfcc, peaks_indexes, peaks_count
+from features import spectral_bandwidth, peaks_indexes, peaks_count
 from utils import remove_system_files
 
 
 def extract_features(file_path):
     features = (
-        # peaks_indexes(file_path),
-        # peaks_count(file_path),
-        # spectral_flatness(file_path),
-        # melspectogram(file_path),
+        peaks_indexes(file_path),
+        peaks_count(file_path),
         spectral_bandwidth(file_path),
-        # wav2mfcc(file_path)
     )
 
     return numpy.concatenate(features).ravel()
-    # return numpy.hstack(features)
-    # return numpy.concatenate(features).ravel()
 
 
 def extract_vectors():
@@ -39,7 +34,6 @@ def extract_vectors():
 
         for file_path in glob.glob(cur_path + "/*." + config.FILES_EXTENSION):
             print "About to process audio in {}".format(cur_label)
-            # sample_rate, data = wavfile.read(file_path)
             features = extract_features(file_path)
 
             train_features.append(features)
