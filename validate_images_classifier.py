@@ -5,6 +5,9 @@ Created on Wed May  2 16:36:09 2018
 @author: Erick A. Montañez
 """
 
+import sys
+sys.path.append('images')
+
 # Third party modules
 import numpy
 from sklearn.svm import LinearSVC
