@@ -8,6 +8,7 @@ Created on Wed May  2 16:36:09 2018
 # Third party modules
 import numpy
 from sklearn.svm import LinearSVC
+from sklearn.neighbors import KNeighborsClassifier
 
 # Project modules
 from extractor import extract_vectors
@@ -20,13 +21,14 @@ print "Training labels: {}".format(numpy.array(train_labels).shape)
 
 # Train the classifier
 print "[STATUS] Creating the classifier.."
-svm_classifier = LinearSVC(random_state=9)
+# classifier = LinearSVC(random_state=9)
+classifier = KNeighborsClassifier(n_neighbors=5)
 
 print "[STATUS] Fitting data/label to model.."
-svm_classifier.fit(train_features, train_labels)
+classifier.fit(train_features, train_labels)
 
 # Validate the classifier
-results = validate(svm_classifier)
+results = validate(classifier)
 
 print "[RESULTS]"
 print "{} validations".format(results['total_validations'])

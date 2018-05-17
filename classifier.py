@@ -1,15 +1,17 @@
 
 import cv2
 from sklearn.svm import LinearSVC
+from sklearn.neighbors import KNeighborsClassifier
 
 from extractor import extract_vectors, extract_features
 
 
 def get_classifier():
     train_features, train_labels = extract_vectors()
-    svm_classifier = LinearSVC(random_state=9)
-    svm_classifier.fit(train_features, train_labels)
-    return svm_classifier
+    #classifier = LinearSVC(random_state=9)
+    classifier = KNeighborsClassifier(n_neighbors=3)
+    classifier.fit(train_features, train_labels)
+    return classifier
 
 
 def classify(file_path, classifier=get_classifier()):
