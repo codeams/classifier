@@ -1,8 +1,9 @@
 
 # User configuration #
-DATASET_NAME = 'initial'
-LABELS = ('avocado', 'banana')  # ('avocado', 'coconut', 'apple', 'banana', 'blueberry')
-WAV_FILES_PER_LABEL = 1
+RECORD_FOR = 'validating'
+DATASET_NAME = 'secondary'
+LABELS = ['blueberry']  # ('avocado', 'coconut', 'apple', 'banana', 'blueberry')
+WAV_FILES_PER_LABEL = 2
 FILES_EXTENSION = 'wav'
 DEBUG_MODE = False
 PRINT_PREDICTIONS = True
@@ -11,4 +12,3 @@ PRINT_PREDICTIONS = True
 DATASET_PATH = 'audios/datasets/' + DATASET_NAME
 TRAIN_PATH = DATASET_PATH + '/train'
 VALIDATE_PATH = DATASET_PATH + '/validate'
-

@@ -7,9 +7,9 @@ import config
 
 FORMAT = pyaudio.paInt16
 CHANNELS = 2
-RATE = 44100  # Try some lower value like 2000
+RATE = 2205 # 44100  # Try some lower value like 2000
 CHUNK = 1024  # ??
-RECORD_SECONDS = 5
+RECORD_SECONDS = 3
 
 
 def record_wav(path, name):
@@ -61,5 +61,13 @@ def record_wav(path, name):
 
 if __name__ == '__main__':
     for label in config.LABELS:
-        for i in range(0, config.WAV_FILES_PER_LABEL):
-            record_wav(config.TRAIN_PATH, "{}/{}".format(label, i))
+        print "Recording for " + label
+
+        if config.RECORD_FOR == 'training':
+            for i in range(0, config.WAV_FILES_PER_LABEL):
+                print "Start record {}".format(i)
+                record_wav(config.TRAIN_PATH, "{}/{}".format(label, i))
+        elif config.RECORD_FOR == 'validating':
+            for i in range(0, config.WAV_FILES_PER_LABEL):
+                print "Start record {}".format(i)
+                record_wav(config.VALIDATE_PATH, "{}/{}".format(label, i))

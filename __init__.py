@@ -1,17 +1,15 @@
 
+import base64
+import cv2 as cv
 from flask import Flask, request, render_template
 from werkzeug.utils import secure_filename
 
-from .images.classifier import get_classifier as get_images_classifier
-from .images.classifier import classify as classify_image
-from .audios.classifier import get_classifier as get_audios_classifier
+from .images.harvester import look_for
 from .audios.classifier import classify as classify_audio
 from translator import translate_label
 
 
 app = Flask(__name__)
-images_classifier = get_images_classifier()
-audios_classifier = get_audios_classifier()
 
 
 @app.route('/', methods=['GET'])
@@ -24,11 +22,23 @@ def classify_route():
     audio = request.files['audio']
     audio_name = secure_filename(audio.filename)
     audio.save('uploads/' + audio_name)
-    prediction = classify_audio('uploads/' + audio_name, classifier=audios_classifier)
+    prediction = classify_audio('uploads/' + audio_name)
 
-    # image = request.files['image']
-    # image_name = secure_filename(image.filename)
-    # image.save('uploads/' + image_name)
-    # prediction = classify_image('uploads/' + image_name, classifier=classifier)
+    harvestable_image = request.files['image']
+    harvestable_image_name = secure_filename(harvestable_image.filename)
+    harvestable_path = 'uploads/' + harvestable_image_name
+    harvestable_image.save(harvestable_path)
+    matches = look_for(prediction, harvestable_path)
+
+    matches_amount = len(matches)
+    encoded_images = []
+
+    for match in matches:
+        match = cv.cvtColor(match, cv.COLOR_BGR2RGB)
+        _, buffer = cv.imencode('.jpg', match)
+        processed_string = base64.b64encode(buffer)
+        encoded_images.append(processed_string)
+
     prediction = translate_label(prediction)
-    return render_template('index.html', prediction=prediction)
+    return render_template('index.html', prediction=prediction, matches_amount=matches_amount, images=encoded_images)
+

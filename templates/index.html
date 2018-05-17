@@ -4,7 +4,7 @@
   <div class='container mt-5'>
     <div class='row justify-content-center'>
       <div class='col-5 border rounded p-5'>
-        <h1 class='mb-4 font-weight-light'>Clasifrutador</h1>
+        <h1 class='mb-4 font-weight-light'>Clasifrutador 🍎</h1>
 
         <form action='' method='POST' enctype='multipart/form-data'>
           <div class='form-group'>
@@ -13,7 +13,7 @@
             </label>
 
             <div class="custom-file">
-              <input type='file' name='audio' id='audio' class='custom-file-input'>
+              <input type='file' name='audio' id='audio' class='custom-file-input' required>
               <label class='custom-file-label' for='audio'>Seleccionar .wav</label>
             </div>
           </div>
@@ -24,7 +24,7 @@
             </label>
 
             <div class="custom-file">
-              <input type='file' name='image' id='image' class='custom-file-input'>
+              <input type='file' name='image' id='image' class='custom-file-input' required>
               <label class='custom-file-label' for='image'>Seleccionar .jpg</label>
             </div>
           </div>
@@ -39,14 +39,28 @@
         {% if prediction %}
           <p class='text-right mt-5'>
             <span class='text-muted'>
-              El clasifrutador cree que eso es un
+              El clasifrutador entendió que debe buscar
             </span>
 
             <strong class='text-primary text-uppercase'>
               {{ prediction }}
             </strong>
           </p>
+
+          <p class='text-right mt-1'>
+            <span class='text-muted'>
+              Se encontraron
+            </span>
+
+            <strong class='text-primary text-uppercase'>
+              {{ matches_amount }} coincidencias
+            </strong>
+          </p>
         {% endif %}
+
+        {% for image in images %}
+          <img class='col-12 mt-4 mb-1' src='data:image/png;base64, {{ image }}'>
+        {% endfor %}
       </div>
     </div>
   </div>

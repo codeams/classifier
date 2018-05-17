@@ -10,8 +10,8 @@ from utils import remove_system_files
 
 
 def extract_features(image):
-    if config.SCALE_IMAGE:
-        cv2.resize(image, (45, 45))
+    # if config.SCALE_IMAGE:
+    #    cv2.resize(image, (45, 45))
 
     features = (
         # haralick(image),
