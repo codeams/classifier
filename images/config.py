@@ -7,6 +7,6 @@ DEBUG_MODE = False
 PRINT_PREDICTIONS = True
 
 # Computed configuration #
-DATASET_PATH = 'datasets/' + DATASET_NAME + '/'
+DATASET_PATH = 'images/datasets/' + DATASET_NAME + '/'
 TRAIN_PATH = DATASET_PATH + '/train'
 VALIDATE_PATH = DATASET_PATH + '/validate'

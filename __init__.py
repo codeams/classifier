@@ -2,12 +2,13 @@
 from flask import Flask, request, render_template
 from werkzeug.utils import secure_filename
 
-from classifier import get_classifier, classify
+from .images.classifier import get_classifier as get_images_classifier
+from .images.classifier import classify as classify_image
 from translator import translate_label
 
 
 app = Flask(__name__)
-classifier = get_classifier()
+classifier = get_images_classifier()
 
 
 @app.route('/', methods=['GET'])
@@ -21,6 +22,6 @@ def classify_route():
     image_name = secure_filename(image.filename)
     image.save('uploads/' + image_name)
 
-    prediction = classify('uploads/' + image_name, classifier=classifier)
+    prediction = classify_image('uploads/' + image_name, classifier=classifier)
     prediction = translate_label(prediction)
     return render_template('index.html', prediction=prediction)
